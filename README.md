@@ -29,6 +29,7 @@ let g:qfex_preview_opt = {
 ```vim
 function! s:setup_vimqfex() abort
   nmap <buffer> p     <Plug>(qfex-preview-toggle)
+  nmap <buffer> <C-p> <Plug>(qfex-preview-toggle-auto)
   nmap <buffer> <CR>  <Plug>(qfex-opener-edit)
   nmap <buffer> <C-t> <Plug>(qfex-opener-tab)
   nmap <buffer> <C-x> <Plug>(qfex-opener-split)

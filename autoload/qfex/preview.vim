@@ -1,4 +1,5 @@
 let s:winid = -1
+let s:is_auto_preview = v:false
 
 let s:config = { 
 \ 'height': 15,
@@ -81,5 +82,19 @@ function! qfex#preview#toggle(idx) abort
     call qfex#preview#open(a:idx)
   else
     call popup_close(s:winid)
+  endif
+endfunction
+
+function! qfex#preview#toggle_autopreview() abort
+  call qfex#preview#toggle(line('.')-1)
+  if s:is_auto_preview
+    let s:is_auto_preview = v:false
+    autocmd! vim-qfex-auto-preview
+  else
+    let s:is_auto_preview = v:true
+    augroup vim-qfex-auto-preview
+      autocmd! * <buffer>
+      autocmd CursorMoved <buffer> nested call qfex#preview#open(line('.')-1)
+    augroup END
   endif
 endfunction
